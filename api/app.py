@@ -47,3 +47,8 @@ def create_fan(fan: Fan):
         raise HTTPException(status_code=409, detail="A fan with MAC " + fan.mac + " already exists")
     new_fan.pop("_id")
     return new_fan
+
+@app.get("/fans")
+def get_fans():
+    return list(fans.find({}, {"_id": 0, "key": 0}))
+
